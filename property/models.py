@@ -10,7 +10,7 @@ class Flat(models.Model):
         blank=True,
         db_index=True,
         verbose_name='Является ли дом новостройкой')
-    
+
     created_at = models.DateTimeField(
         'Когда создано объявление',
         default=timezone.now,
@@ -45,7 +45,12 @@ class Flat(models.Model):
         blank=True,
         db_index=True)
 
-    has_balcony = models.BooleanField('Наличие балкона', null=True, blank=True, db_index=True)
+    has_balcony = models.BooleanField(
+        'Наличие балкона',
+        null=True,
+        blank=True,
+        db_index=True)
+
     active = models.BooleanField('Активно-ли объявление', db_index=True)
     construction_year = models.IntegerField(
         'Год постройки здания',
@@ -85,8 +90,16 @@ class Complaint(models.Model):
 
 class Owner(models.Model):
     name = models.CharField('ФИО владельца', max_length=200, db_index=True)
-    phonenumber = models.CharField('Номер владельца', max_length=20, db_index=True)
-    pure_phonenumber = PhoneNumberField('Нормализованный номер владельца', blank=True, db_index=True)
+    phonenumber = models.CharField(
+        'Номер владельца',
+        max_length=20,
+        db_index=True)
+
+    pure_phonenumber = PhoneNumberField(
+        'Нормализованный номер владельца',
+        blank=True,
+        db_index=True)
+
     flat = models.ManyToManyField(
         Flat,
         verbose_name='Квартиры в собственности',
