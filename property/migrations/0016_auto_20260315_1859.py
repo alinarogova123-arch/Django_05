@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
     def enter_flats(apps, schema_editor):
         flat = apps.get_model('property', 'Flat')
         owner = apps.get_model('property', 'Owner')
-        for owner in owner.objects.all():
+        for owner in owner.objects.all().iterator():
             flat_entities = flat.objects.filter(owner_pure_phone=owner.pure_phonenumber)
             for flat_entity in flat_entities:
                 owner.flat.add(flat_entity.id)
