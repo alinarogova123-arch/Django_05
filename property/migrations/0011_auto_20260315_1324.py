@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
 
     def enter_owner_pure_phone(apps, schema_editor):
         flat = apps.get_model('property', 'Flat')
-        for flat in flat.objects.all():
+        for flat in flat.objects.all().iterator():
             phone_number = phonenumbers.parse(flat.owners_phonenumber, "RU")
             if phonenumbers.is_valid_number(phone_number):
                 flat.owner_pure_phone = phonenumbers.format_number(phone_number, phonenumbers.PhoneNumberFormat.E164)
