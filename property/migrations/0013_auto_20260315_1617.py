@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
     def create_owners(apps, schema_editor):
         flat = apps.get_model('property', 'Flat')
         owner = apps.get_model('property', 'Owner')
-        for flat in flat.objects.all():
+        for flat in flat.objects.all().iterator():
             owner.objects.get_or_create(
                 name=flat.owner,
                 owners_phonenumber=flat.owners_phonenumber,
