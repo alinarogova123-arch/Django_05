@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
         flat = apps.get_model('property', 'Flat')
         owner = apps.get_model('property', 'Owner')
         for owner in owner.objects.all():
-            flat_entities = flat.objects.filter(owner=owner.name)
+            flat_entities = flat.objects.filter(owner_pure_phone=owner.pure_phonenumber)
             for flat_entity in flat_entities:
                 owner.flat.add(flat_entity.id)
                 owner.save()
